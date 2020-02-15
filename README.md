@@ -23,9 +23,9 @@
     - 1.4 Three Dice - Sum of rolls
     - 1.5 Martingale Doubling System
     - 1.6 Hospital Babies Born Proportion
+    - 2.0 Probability Distributions in Python
     - 2.1 Uniform Distribution
     - 2.2 Click Rate Binomial 
-    - Probability Distributions in Python
     
 
 - R Code
