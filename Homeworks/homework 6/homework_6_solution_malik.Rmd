@@ -1,6 +1,10 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Home Work 6 By Malik :)"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r}
@@ -92,13 +96,6 @@ Further more, compared with gamma, weibull and erlang distributions.
 
 3.	All of the data and code used in the paper are published online. On Moodle, you can find nCoV-IDD-data-dictionary and nCoV-IDD-traveler-data (both are csv files that you should be able to open in excel). Play with these two files and answer the following questions.
 
-```{r}
-
-# Loading Data
-covid_data = read.csv("./nCoV_simple.csv")$days
-
-```
-
 
 (1)	Write down what these variable names stand for: EL, ER, SL, SR, PL, PR.
 
@@ -112,10 +109,25 @@ PR	=>	presentation of case to hospital right bound <br>
 
 (2)	Find the case whose UID is U0021. When did he arrive in Wuhan? When did he leave Wuhan? If you had to make one estimate of his incubation period, what would it be? Briefly explain.
 
-1/10/2020 0:00 to 	1/18/2020 23:59
+1/10/2020 0:00 to 1/18/2020 23:59 <br> 
+About 8 days of stay. <br>
+
+The suspect traveled from Wuhan to Hongkon. it could have longer incubation period as compared to mainland china. As the person may have left without any symptoms Or may have not reported the symptoms that could be a possible case. In gerneral, according to report people from outside china are expected to be have little longer incubation period.
+
+From my observarion, it clearly more then 8 days assuming that he had no sympthoms while the person was in wuahan. And maximum range in about 14 days. I would guess 10 days for this case.
 
 
 (3)	Find the case whose UID is U0001. Why would it be very hard to determine this person’s incubation period?
 
+This person travel Wuhan to Washington	Snohomish County at 1/15/2020  11:59:00 PM. 
+Assuming that he had no symptoms at the time of travel. We have no data when he arrived in wuhan. Because of that we cannot bound the possible time period of exposure in this case. As the virus began in december, this person could be an outlier with exceptional incubation period. That's why its hard to estimate in this case also considering we have limited number of observations. Maybe longer incubation period have not reported.
+
+As stated in the report:
+"We have used conservative bounds of possible exposure and symptom onset where exact times were not known, but there may be further inaccuracy in these data that we have not considered"
+
 (4)	Find another case whose incubation period would be hard to determine. Discuss why.
+
+U0003, U0004 and many more cases like this dont have left bound for potential exposure. Alternative approches are used in these cases for exposure esitmation. Because of the same reason as mentioned in above question.
+
+Other possible scenario could be, the poeple with high incubuation period transmit the virus to the others, and we do not even know when excatly that happend. As the first person do not show any sympthoms in the first place. This make estimations harder.
 
