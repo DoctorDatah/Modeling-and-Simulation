@@ -15,7 +15,8 @@
     
 - Probability Basics (365 Data Science)
     
-- Code (Python)
+- Python Code
+ <! ––
     - 1.1 Number of Head in 2 coins
     - 1.2 Pair of six
     - 1.3.a Heads or Tails - Distribution of Wining
@@ -25,7 +26,7 @@
     - 1.6 Hospital Babies Born Proportion
     - 2.0 Probability Distributions in Python
     - 2.1 Uniform Distribution
-    - 2.2 Click Rate Binomial 
+    - 2.2 Click Rate Binomial -->
     
 
 - R Code
