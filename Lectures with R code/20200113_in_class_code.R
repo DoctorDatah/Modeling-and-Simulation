@@ -65,9 +65,9 @@ num.game=0
 current.trace=current #save the winning trajectory for plotting
 
 while((current<target)&(num.game<10000)){
-    num.game=num.game+1
-    current=current + sample(c(-1,1),size=1,replace=T)
-    current.trace=c(current.trace,current)
+  num.game=num.game+1
+  current=current + sample(c(-1,1),size=1,replace=T)
+  current.trace=c(current.trace,current)
 }
 
 # visualize result

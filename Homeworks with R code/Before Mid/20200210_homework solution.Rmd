@@ -1,0 +1,115 @@
+---
+title: 'DATA 252 / DATA 551: Homework 4'
+author: ''
+date: ' '
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  word_document: default
+fontsize: 12pt
+---
+
+<!-- do not alter this first chunk below  -->
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\begin{itemize}
+  \item You are expected to complete this homework before class on Feb 17, 2020.  Contents on this homework (including the assigned video and activity in the last problem) might appear on the quiz.  Solutions of the homework will be posted on Moodle.
+\end{itemize}
+
+\vspace{0.1in}
+\noindent 1. In \textit{Introduction to Probability}, do questions 26 and 28 on page 222.
+
+SOLUTION: 
+
+Q26. Rejection rate is $P(X \notin 1\pm0.003)$, which is given by \texttt{pnorm(1-0.003,mean=1,sd=0.002) + 1-pnorm(1+0.003, mean=1, sd=0.002)} = `r pnorm(1-0.003,mean=1,sd=0.002) + 1-pnorm(1+0.003, mean=1, sd=0.002)`.  Trying different values for $\sigma$, we see that a value of $\sigma$ that is slightly smaller than 0.0012 will ensure a rejection rate of less than 1 percent.
+```{r}
+mysd=seq(from=0.0001, to=0.002, by=0.0001)
+cbind(mysd,
+      round(pnorm(1-0.003,mean=1,sd=mysd) + 1-pnorm(1+0.003, mean=1, sd=mysd),3))
+```
+
+Q28. We want $P(X > 290) + P(X<240)$, which is given by \texttt{pnorm(240,mean=270,sd=10) + 1-pnorm(290, mean=270, sd=10)}, which gives a probability of only `r pnorm(240,mean=270,sd=10) + 1-pnorm(290, mean=270, sd=10)` that the defendant was in the country when the child was conceived. 
+
+
+\vspace{0.1in}
+\noindent 2. Suppose the weight of adult, female cats in a certain cat population approximately follows a normal distribution with mean = 8 lbs and sd (standard deviation) = 2.2 lbs.  What proportion of female cats weighs less than 10 lbs?  More than 6 lbs?  Between 7 and 9 lbs?
+
+SOLUTION:
+```{r}
+pnorm(10,mean=8,sd=2.2)  #less than 10
+1-pnorm(6,mean=8,sd=2.2) #more than 6
+pnorm(9,mean=8,sd=2.2) - pnorm(7,mean=8,sd=2.2) #between 7 and 9
+```
+
+\vspace{0.1in}
+\noindent 3. In \textit{Introduction to Probability}, do question 29 on page 222. The \textbf{memoryless property} of the exponential distribution implies that the probability that the waiting time exceeds 8 hours if it already exceeds 4 hours is the same as the probability that the waiting time exceeds 4 hours.  Calculate this probability first and then write a simulation to verify.
+
+SOLUTION: Both questions have the same probability, $P(X > 4)$, calculated as:
+```{r}
+1-pexp(4,rate=1/2)
+```
+
+\vspace{0.1in}
+\noindent 4. Suppose the proportion of all stocks that will go up in a given day (i.e., the closing price is higher than the opening price) can be modeled by a beta distribution with parameters shape1 = 2 and shape2 = 3.
+\begin{itemize}
+\item[a.] Simulate 5000 values from the given beta distribution. Plot a histogram and note its shape and range. Use the mean of the simulated values to estimate the true mean of the beta distribution (which is $2/(2+3)=0.4$). In the context of this problem, what does each simulated value represent?
+\item[b.] What is the chance that we have a really bad day, when less than 5\% of all stocks will go up?
+\item[c.]  What is the chance that we have a really good day, when more than 75\% of all stocks will go up?
+\item[d.] On any given day, what is the chance that 30\% to 40\% of all stocks will go up?
+\end{itemize}
+
+SOLUTION: In the simulation, each number corresponds to a simulated day and represents the percent of stocks that go up in that day. The shape of this beta distribution is right skewed.
+```{r}
+mysim=rbeta(5000,shape1=2,shape2=3)
+hist(mysim,nclass=20,main='5000 simulated days',
+     xlab='% of stocks going up',col='royalblue')
+```
+
+The probabilities in b to d are calculated below.
+```{r}
+pbeta(0.05,shape1=2,shape2=3)
+1-pbeta(0.75,shape1=2,shape2=3)
+pbeta(0.4,shape1=2,shape2=3) - pbeta(0.3,shape1=2,shape2=3)
+```
+
+
+\vspace{0.1in}
+\noindent 5. Watch this video \url{https://www.youtube.com/watch?v=JNm3M9cqWyc&t=352s} that explains the Central Limit Theorem. Next, go to \url{http://onlinestatbook.com/stat_sim/sampling_dist/}. Play with the simulation until you have a good understanding of the Central Limit Theorem. Follow the instructions on the last two slides of Monday's lecture to design an algorithm that studies the effect of the sample size $n$.
+
+SOLUTION: As an example, we use a sample size of $n=20$ and a population distribution of beta distribution with shape parameters 2 and 3. Code below shows that CLT works very well in this case. You should try to change different values of $n$ and different population shapes to study the effect of sample size. For instance, does $n=10$ still work? $n=5$? What if the population distribution has a long tail or is very skewed?  You can try a t distribution with parameter df=2, and try a gamma distribution with parameters shape=0.01 and rate=2. 
+
+```{r}
+nsim=5000
+result=rep(NA,nsim)
+
+n=20  #sample size
+curve(dbeta(x,shape1=2,shape2=3),
+      main='population distribution',
+      xlab=NA,
+      ylab=NA) #population distribution
+
+for(i in 1:nsim){
+  result[i]=mean(rbeta(n=20,shape1=2,shape2=3))
+}
+
+hist(result,
+     main=paste(nsim,'simulated sample means'),
+     xlab=NA)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
